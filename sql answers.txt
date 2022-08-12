@@ -1,0 +1,145 @@
+1)
+
+2)Check constraint is a constraint which can be applied on particular coloumn which restrict the user while inserting the unreleated data
+And it checks whether the insert data is satisfing the particular condition of the coloumn or not then only it will insert 
+
+3)Trigger  it is a procedure and its a database object it will be prevent the performing of ddl ,dml commands on tables ,databse ,server,
+ Untill and unless without giving the permission
+  * Triggers will be help us to maintain the uniform case
+  * Triggers will be stored the insert ,update,deleted data of the copy through which we are able to get what the data has been 
+    Added into the particual day inside the business
+
+4)Indentity its a predefined function of databse it will be applied on primary key coloumn, the value of primary key automaticaly
+  Genrated inside the table based on user requirments 
+ example INDENTITY(1,2) 1--Start with one 
+                        2--increment by 2 
+
+5)commit will be help us to store the data permently inside the table 
+  rollback will be help us to make undo the query execution 
+
+6)filterd index its part of non clusterd index which help us to make a index on particular data of the coloumn
+
+7)join is combining the tables from two or more tables 
+*types of joins 
+1)inner join 2)outer join 3)left join 4)right join 5)cross join 6)self join
+
+8)create two tables in first table we consider as parent table and second table as child table in parent table we have to use a primary key 
+on particual coloumn 
+and in child table we have to apply forgin key on a table which has the same coloumn of primary key and data type should be same
+9)*function have only input parameter,stored procedure have both input parameter and output parameter
+  *function have return type ,stored procedure may or may not have return type
+  *function have try catch block but store procedure dont have try catch block
+10)clusterd index can be applied on particular coloumn it will be automate genrate number and easily we retrive the data from the table 
+clusterd index only we can apply on a single coloumn of the table
+
+
+
+CREATE DATABASE ORG;
+
+
+
+USE ORG;
+
+CREATE TABLE Worker (
+	WORKER_ID INT NOT NULL PRIMARY KEY,
+	FIRST_NAME CHAR(25),
+	LAST_NAME CHAR(25),
+	SALARY INT,
+	JOINING_DATE DATETIME,
+	DEPARTMENT CHAR(30),
+);
+
+        INSERT INTO Worker VALUES(001, 'Monika', 'Arora', 100000, '12-08-20 04:00:00', 'HR')
+		INSERT INTO Worker VALUES(002, 'Niharika', 'Verma', 80000, '12-08-20 04:00:00', 'Admin')
+		INSERT INTO Worker VALUES(003, 'Vishal', 'Singhal', 300000, '12-08-20 04:00:00', 'HR')
+		INSERT INTO Worker VALUES(004, 'Amitabh', 'Singh', 500000, '12-08-20 04:00:00', 'Admin')
+		INSERT INTO Worker VALUES(005, 'Vivek', 'Bhati', 500000, '12-08-20 04:00:00', 'Admin')
+		INSERT INTO Worker VALUES(006, 'Vipul', 'Diwan', 200000, '12-08-20 04:00:00', 'Account')
+		INSERT INTO Worker VALUES(007, 'Satish', 'Kumar', 75000, '12-08-20 04:00:00', 'Account')
+		INSERT INTO Worker VALUES(008, 'Geetika', 'Chauhan', 90000, '12-08-20 04:00:00', 'Admin')
+
+
+   CREATE TABLE Title (
+	WORKER_REF_ID INT,
+	WORKER_TITLE CHAR(25),
+	AFFECTED_FROM DATETIME,
+	FOREIGN KEY (WORKER_REF_ID)
+		REFERENCES Worker(WORKER_ID)
+        ON DELETE CASCADE
+);
+INSERT INTO Title 
+	(WORKER_REF_ID, WORKER_TITLE, AFFECTED_FROM) VALUES
+ (001, 'Manager', '2016-02-20 00:00:00'),
+ (002, 'Executive', '2016-06-11 00:00:00'),
+ (008, 'Executive', '2016-06-11 00:00:00'),
+ (005, 'Manager', '2016-06-11 00:00:00'),
+ (004, 'Asst. Manager', '2016-06-11 00:00:00'),
+ (007, 'Executive', '2016-06-11 00:00:00'),
+ (006, 'Lead', '2016-06-11 00:00:00'),
+ (003, 'Lead', '2016-06-11 00:00:00');
+
+
+ CREATE TABLE Bonus (
+	WORKER_REF_ID INT,
+	BONUS_AMOUNT INT,
+	BONUS_DATE DATETIME,
+	FOREIGN KEY (WORKER_REF_ID)
+		REFERENCES Worker(WORKER_ID)
+        ON DELETE CASCADE
+);INSERT INTO Bonus 
+	(WORKER_REF_ID, BONUS_AMOUNT, BONUS_DATE) VALUES
+		(001, 5000, '16:02:20'),
+		(002, 3000, '16:06:11'),
+		(003, 4000, '16:02:20'),
+		(001, 4500, '16:02:20'),
+		(002, 3500, '16:06:11');
+
+
+ --1
+   CREATE SYNONYM E1 FOR WORKER
+   SELECT * FROM E1
+
+--2
+   SELECT CONCAT (FIRST_NAME ,'', LAST_NAME) AS COMPLETE_NAME FROM WORKER 
+
+   
+--3
+   SELECT * FROM WORKER ORDER BY FIRST_NAME
+
+ --4  
+   SELECT SALARY FROM WORKER WHERE SALARY BETWEEN 100000 and 500000
+
+--5
+
+select count(department) as cont ,department from worker group by DEPARTMENT
+
+--6
+
+ create trigger trg_abc
+ on Title
+ for insert,update,delete
+ AS 
+ BEGIN 
+      print dml operation cannot perform
+	  rollback transaction,
+ END
+  
+  --7
+create abo.sp(@p decimal (18,0 0.0),
+
+
+
+  create  Stored procedure sp_abc on worker
+  as 
+  begin 
+  select avg(salary) from worker
+  end 
+
+  --8
+
+  create index ix_abg 
+  on bonus_date
+   
+		
+
+
